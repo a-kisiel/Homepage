@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title> Home </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- Particles implementation (here and in the CSS/js files) shamelessly ripped from https://codepen.io/bob6664569/pen/rOzmve -->
+
+    <!-- particles.js container --> 
+    <div id="particles-js"></div>
+
+    <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <form id="form" name="engageform" autocomplete="off" method="get" action="http://www.google.com/search">
+
+        <div id="clock"></div>
+
+        <div id="searchbar">
+            <table border="0" cellpadding="0">
+            <tr><td>
+            <input type="text" id="textfield" name="q" size="25" maxlength="255" value="" required autofocus/>
+            <input type="submit" id="go" value="Engage" /></td></tr>
+            <tr><td align="center" style="font-size:75%">
+            </td></tr></table>
+        </div>
+        
+    </form>
+</body>
+
+<script async src="home.js"></script>
