@@ -1,46 +1,140 @@
+// Hard-coded preferences (because reading a JSON file is awful)
+var timeFormat = true;
+var picardVoice = true;
+
+// Preferences adjustments
+
+function toggleVC() {
+  picardVoice = picardVoice ? false : true;
+}
+
 var today = new Date();
 
-var h = today.getHours();
-var m = today.getMinutes();
-var qual;
+// Normal time
+function normalTime() {
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let qual;
 
-if (h < 13)
-    qual = 'am';
-else {
-    h -= 12;
-    qual = 'pm';
+  if (h < 13)
+      qual = 'am';
+  else {
+      h -= 12;
+      qual = 'pm';
+  }
+  if (m < 10)
+      m = '0' + m;
+
+    document.getElementById('stardate').innerHTML = h + ":" + m + " " + qual;
 }
-if (m < 10)
+
+// 24-hour time
+function time24() {
+  let h = today.getHours();
+  let m = today.getMinutes();
+
+  if (m < 10)
     m = '0' + m;
+
+  document.getElementById('stardate').innerHTML = h + ":" + m;
+}
+
+var tellTime = timeFormat ? normalTime : time24;
+
+tellTime();
+
+function toggleClock() {
+  if (timeFormat) {
+    timeFormat = false;
+    tellTime = time24; 
+  }
+  else {
+    timeFormat = true;
+    tellTime = normalTime;
+  }
+}
+
+// Writes time to DOM every second
+setInterval(function() {
+  tellTime();
+}, 1000)
 
 const prompts = ["Engage", 'Punch it', "Make it so", "Go (boldly)", "Assimilate this",
     "Energize"];
 
-document.getElementById('clock').innerHTML = h + ":" + m + " " + qual;
-document.getElementById('go').value = prompts[Math.floor(Math.random() * Math.floor(prompts.length))]
-if (document.readyState === "complete")
-  document.getElementById('textfield').focus();
+document.getElementById('warp9').innerHTML = prompts[Math.floor(Math.random() * Math.floor(prompts.length))]
 
-setInterval(function() {
-    var today = new Date();
+// Check whether String is a url
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+}
 
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var qual;
+// Intercepts 'enter' keypress
+var coord = document.getElementById('heading');
+coord.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById('warp9').click();
+  }
+});
 
-    if (h == 0)
-      h = 12;
-    if (h < 13)
-        qual = 'am';
-    else {
-        h -= 12;
-        qual = 'pm';
+// E N G A G E
+function engage() {
+  let heading = document.getElementById('heading').value;
+
+  // Unless there's been something typed in the text field don't navigate anywhere (address bar has its own mechanism)
+  if (heading === '')
+    return;
+
+  if (picardVoice) {
+      var picard = new Audio('engage.mp3');
+      picard.play();
+      if (validURL(heading))
+        window.open('http://' + heading);
+      else  
+        window.open('http://google.com/search?q=' + heading);
+
+      setTimeout(() => {
+        window.close()
+      }, 2000);
     }
-    if (m < 10)
-        m = '0' + m;
+  else {
+    window.open('http://google.com/search?q=' + heading, '_self');
+  }
+}
 
-    document.getElementById('clock').innerHTML = h + ":" + m + " " + qual;
-}, 1000)
+function togglePrefs() {
+  if (document.getElementById('prefpanel').style.width != "260px") {
+    document.getElementById('prefpanel').style.width = "260px";
+    let elements = document.getElementsByClassName('switch');
+    for (var i=0; i<elements.length; i++) {
+      elements[i].style.display = 'block';
+    }
+    setTimeout(function(){
+      elements = document.getElementsByClassName('preflabel');
+      for (var i=0; i<elements.length; i++) {
+      elements[i].style.display = 'block';
+      }
+    }, 400)
+  }
+  else {
+    document.getElementById('prefpanel').style.width = "0px";
+    let elements = document.getElementsByClassName('switch');
+    for (var i=0; i<elements.length; i++) {
+      elements[i].style.display = 'none';
+    }
+    elements = document.getElementsByClassName('preflabel');
+    for (var i=0; i<elements.length; i++) {
+      elements[i].style.display = 'none';
+    }
+  }
+}
 
 /* Begin particle implementation */
 

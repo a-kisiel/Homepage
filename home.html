@@ -6,11 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
+
+    <div id="prefpanel" class="sidebar">
+        <label class="switch">
+            <input type="checkbox" onchange="toggleVC();" checked>
+            <span class="slider round"></span>
+          </label>
+          <p class="preflabel"> Toggle voice commands </p>
+          <label class="switch">
+            <input type="checkbox" onchange="toggleClock();">
+            <span class="slider round"></span>
+          </label>
+          <p class="preflabel"> Toggle 24hr clock </p>
+    </div>
 
     <!-- Particles implementation (here and in the CSS/js files) shamelessly ripped from https://codepen.io/bob6664569/pen/rOzmve -->
 
@@ -20,20 +34,15 @@
     <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-    <form id="form" name="engageform" autocomplete="off" method="get" action="http://www.google.com/search">
+    <button title="Preferences" id="prefs" onclick="togglePrefs();"><i class="fas fa-cog"></i></button>
 
-        <div id="clock"></div>
+    <div id="stardate"></div>
 
-        <div id="searchbar">
-            <table border="0" cellpadding="0">
-            <tr><td>
-            <input type="text" id="textfield" name="q" size="25" maxlength="255" value="" required autofocus/>
-            <input type="submit" id="go" value="Engage" /></td></tr>
-            <tr><td align="center" style="font-size:75%">
-            </td></tr></table>
-        </div>
-        
-    </form>
+    <div id="conn">
+        <input type="text" class="dash_button" id="heading" size="28" maxlength="255" value="" required autofocus/>
+        <button type="button" class="dash_button" id="warp9" onclick="engage();"></button>
+    </div>
+
 </body>
 
 <script async src="home.js"></script>
