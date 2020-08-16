@@ -95,8 +95,8 @@ setInterval(function() {
   tellTime();
 }, 1000)
 
-const prompts = ["Engage", 'Punch it', "Make it so", "Go (boldly)", "Assimilate this",
-    "Energize"];
+const prompts = ["Engage", 'Punch it', "Make it so", "Go (boldly)", "Assimilate this", "Energize"
+];
 
 document.getElementById('warp9').innerHTML = prompts[Math.floor(Math.random() * Math.floor(prompts.length))]
 
@@ -129,7 +129,8 @@ function engage() {
     return;
 
   if (voiceOn) {
-      var picard = new Audio('engage.mp3');
+      let engageNo = Math.floor(Math.random() * 7)
+      var picard = new Audio("Engage mp3s/engage" + engageNo + ".mp3");
       picard.play();
       if (validURL(heading))
         window.open('http://' + heading);
