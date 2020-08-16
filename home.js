@@ -1,11 +1,69 @@
-// Hard-coded preferences (because reading a JSON file is awful)
-var timeFormat = true;
-var picardVoice = true;
+// Cookie Operations
+
+console.log("Cookie upon load: " + document.cookie)
+
+// Bakes a fresh new cookie
+function bakeCookie(cooKey, value, shelfLife) {
+  var d = new Date();
+  d.setTime(d.getTime() + (shelfLife*24*60*60*1000));
+  var expiration = "expires=" + d.toUTCString();
+
+  document.cookie = 
+    cooKey + "=" + value + "; " +
+    "sameSite=lax" + "; " + 
+    expiration + "; path=/;" + 
+    "Secure=true";
+}
+
+// Checks whether a given cookie exists
+function isCookie(cooKey) {
+  if (document.cookie.split(';').some(function(item) {
+    return item.trim().indexOf(cooKey + '=') == 0
+  })) 
+    return true;
+  else
+    return false;
+}
+
+// Gets a value from an existing cookie using a key
+function getCookie(cooKey) {
+  if (document.cookie == ""){
+    return;
+  }
+  const cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith(cooKey))
+  .split('=')[1];
+
+  return cookieValue;
+}
+
+// Always make brand new cookie on settings change based on current (i.e. most recent) settings
+
+// Default preferences
+var is24 = false;
+var voiceOn = true;
+
+// Alters preferences if a cookie exists
+if (document.cookie != "") {
+  if (getCookie('vc') === 'active') {
+    voiceOn = true;
+    document.getElementById('vcSwitch').checked = true;
+  }
+  if (getCookie('ac') === 'active') {
+    is24 = true;
+    document.getElementById('acSwitch').checked = true;
+  }
+}
 
 // Preferences adjustments
 
 function toggleVC() {
-  picardVoice = picardVoice ? false : true;
+  voiceOn = voiceOn ? false : true;
+  let newVC = voiceOn ? 'active' : 'inactive';
+  bakeCookie('vc', newVC, 100);
+  let newAC = is24 ? 'active' : 'inactive';
+  bakeCookie('ac', newAC, 100);
 }
 
 var today = new Date();
@@ -39,19 +97,24 @@ function time24() {
   document.getElementById('stardate').innerHTML = h + ":" + m;
 }
 
-var tellTime = timeFormat ? normalTime : time24;
+var tellTime = is24 ? time24 : normalTime;
 
 tellTime();
 
 function toggleClock() {
-  if (timeFormat) {
-    timeFormat = false;
-    tellTime = time24; 
+  if (is24) {
+    is24 = false;
+    tellTime = normalTime; 
   }
   else {
-    timeFormat = true;
-    tellTime = normalTime;
+    is24 = true;
+    tellTime = time24;
   }
+
+  let newAC = (is24 == true) ? 'active' : 'inactive';
+  bakeCookie('ac', newAC, 100);
+  let newVC = (voiceOn == true) ? 'active' : 'inactive';
+  bakeCookie('vc', newVC, 100);
 }
 
 // Writes time to DOM every second
@@ -92,7 +155,7 @@ function engage() {
   if (heading === '')
     return;
 
-  if (picardVoice) {
+  if (voiceOn) {
       var picard = new Audio('engage.mp3');
       picard.play();
       if (validURL(heading))
@@ -102,7 +165,7 @@ function engage() {
 
       setTimeout(() => {
         window.close()
-      }, 2000);
+      }, 2400);
     }
   else {
     window.open('http://google.com/search?q=' + heading, '_self');
