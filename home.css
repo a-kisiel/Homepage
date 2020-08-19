@@ -1,175 +1,235 @@
 #stardate {
-    padding-top: 18%;
-    font-size: 4.4em;
-    font-family: 'Open Sans';
-    text-align: center;
-    color: white;
+  padding-top: 18%;
+  font-size: 4.4em;
+  font-family: 'Open Sans';
+  text-align: center;
+  color: white;
 }
 
 #conn {
-    padding-top: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  padding-top: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dash_button {
-    font-family: 'Open Sans';
-    font-size: 2em;
-    opacity: 80%;
-    border-radius: 5px;
-    padding: 8px;
+  font-family: 'Open Sans';
+  font-size: 2em;
+  opacity: 80%;
+  border-radius: 5px;
+  padding: 8px;
 }
 
 .dash_button:hover {
-    transition: .2s;
-    box-shadow: 0 0 4px white;
+  transition: .2s;
+  box-shadow: 0 0 4px white;
 }
 
 #warp9 {
-    margin-left: 24px;
-    padding: 10px;
-    font-size: 1.6em;
+  margin-left: 24px;
+  padding: 10px;
+  font-size: 1.6em;
 }
 
 /* Preferences */
 
 #prefs {
-    color: white;
-    background-color: transparent;
-    font-size: 2em;
-    margin-left: 4px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    text-align: center;
-    border: none;
-    opacity: 80%;
-    z-index: 2;
+  color: white;
+  background-color: transparent;
+  font-size: 2em;
+  margin-left: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-align: center;
+  border: none;
+  opacity: 80%;
+  z-index: 2;
 
-    animation-name: spin;
-    animation-duration: 16000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+  animation-name: spin;
+  animation-duration: 16s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
 }
 
 @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+from {
+    transform:rotate(0deg);
+}
+to {
+    transform:rotate(360deg);
+}
 }
 
-.sidebar {
-    height: 100%;
-    width: 0px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: black;
-    opacity: 60%;
-    padding-top: 60px;
-    transition: .4s;
+#sidebar {
+  height: 100%;
+  width: 260px;
+  margin-left: -260px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 60%;
+  padding-top: 60px;
+  transition: margin-left .6s;
+}
+
+/* The text field under the color selector */
+
+#colorBar {
+  display: flex;
+  margin-top: 240px;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+}
+
+#enterColor {  
+  font-family: 'Open Sans';
+  background-color: #111111;
+  width: 50%;
+  color: orange;
+  margin-left: 60px;
+  padding: 4px;
+  padding-left: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+}
+
+#colorButton {
+  position: inherit;
+  width: auto;
+  height: auto;
+  font-family: 'Open Sans';
+  margin-left: 8px;
+  border-radius: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1em;
+}
+
+#revertButton {
+  position: inherit;
+  width: auto;
+  height: auto;
+  font-family: 'Open Sans';
+  margin-left: 8px;
+  border-radius: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1em;
+}
+
+#colorNote {
+  position: inherit;
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  font-family: 'Open Sans';
+  color: gray;
+  font-size: .8em;
+  text-align: center;
 }
 
 .switch {
-    position: relative;
-    display: none;
-    margin-left: 10px;
-    width: 60px;
-    height: 34px;
-    -webkit-animation: fadein 1s;
-    animation: fadein 1s;
-  }
-
-  @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  position: relative;
+  display: none;
+  margin-left: 10px;
+  width: 60px;
+  height: 34px;
 }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: orange;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px peachpuff;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: orange;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px peachpuff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#picker {
+  display: none;
+  margin-left: 20px;
+}
 
 /* Begin particles implementation */
 
 /* ---- reset ---- */
 
 body {
-    margin: 0;
-    background-color: #17182f;
-  }
-  
-  canvas {
+  margin: 0;
+  background-color: #17182f;
+  overflow-x: hidden;
+}
+
+canvas {
     display: block;
-  }  
-  
-  /* ---- particles.js container ---- */
-  
-  #particles-js {
+}  
+
+/* ---- particles.js container ---- */
+
+#particles-js {
     position: absolute;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .preflabel {
-      color: white;
-      padding-left: 10px;
-      font-family: 'Open Sans';
-      display: none;
-      -webkit-animation: fadein .4s;
-      animation: fadein .4s;
-  }
+.preflabel {
+    color: white;
+    padding-left: 10px;
+    font-family: 'Open Sans';
+    display: none;
+}
