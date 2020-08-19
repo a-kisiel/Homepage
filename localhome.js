@@ -164,29 +164,10 @@ function engage() {
 
 // Open/close the preferences menu
 function togglePrefs() {
-  if (document.getElementById('sidebar').style.marginLeft != '0px') {
+  if (document.getElementById('sidebar').style.marginLeft != '0px')
     document.getElementById('sidebar').style.marginLeft = '0px';
-    let elements = document.getElementsByClassName('switch');
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.display = 'block';
-    }
-    document.getElementById('colorNote').style.display = 'none';
-    elements = document.getElementsByClassName('preflabel');
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.display = 'block';
-    }
-  }
-  else {
+  else
     document.getElementById('sidebar').style.marginLeft = '-260px';
-    let elements = document.getElementsByClassName('switch');
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.display = 'none';
-    }
-    elements = document.getElementsByClassName('preflabel');
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.display = 'none';
-    }
-  }
 }
 
 /* Begin particle implementation */

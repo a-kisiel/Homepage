@@ -23,7 +23,7 @@
 
 .dash_button:hover {
   transition: .2s;
-  box-shadow: 0 0 4px white;
+  box-shadow: 0 0 6px white;
 }
 
 #warp9 {
@@ -70,16 +70,16 @@ to {
   top: 0;
   left: 0;
   background-color: black;
-  opacity: 60%;
+  opacity: 70%;
   padding-top: 60px;
   transition: margin-left .6s;
 }
 
-/* The text field under the color selector */
+/* The text field/buttons under the color selector */
 
 #colorBar {
   display: flex;
-  margin-top: 240px;
+  margin-top: 20px;
   width: 80%;
   justify-content: center;
   align-items: center;
@@ -98,34 +98,6 @@ to {
   border-radius: 5px;
 }
 
-#colorButton {
-  position: inherit;
-  width: auto;
-  height: auto;
-  font-family: 'Open Sans';
-  margin-left: 8px;
-  border-radius: 5px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 1em;
-}
-
-#revertButton {
-  position: inherit;
-  width: auto;
-  height: auto;
-  font-family: 'Open Sans';
-  margin-left: 8px;
-  border-radius: 5px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 1em;
-}
-
 #colorNote {
   position: inherit;
   width: auto;
@@ -139,10 +111,25 @@ to {
 
 .switch {
   position: relative;
-  display: none;
+  display: block;
   margin-left: 10px;
   width: 60px;
   height: 34px;
+}
+
+.colorButtons {
+  display: block;
+  position: inherit;
+  width: auto;
+  height: auto;
+  font-family: 'Open Sans';
+  margin-left: 8px;
+  border-radius: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1em;
 }
 
 /* Hide default HTML checkbox */
@@ -201,7 +188,7 @@ input:checked + .slider:before {
 }
 
 #picker {
-  display: none;
+  display: block;
   margin-left: 20px;
 }
 
@@ -231,5 +218,5 @@ canvas {
     color: white;
     padding-left: 10px;
     font-family: 'Open Sans';
-    display: none;
+    display: block;
 }

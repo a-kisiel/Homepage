@@ -30,14 +30,14 @@
         <p class="preflabel"> Toggle 24hr clock </p>
 
         <!-- Color wheel implementation (here and in the CSS/js files) shamelessly ripped from https://iro.js.org/ -->
-        <div id="picker" class="switch"></div>
+        <div id="picker""></div>
         <div id="colorBar">
-            <input type="tel" maxlength="6" id="enterColor" class="switch">
-            <button id="colorButton" class="switch colorButtons"
+            <input type="tel" maxlength="6" id="enterColor" class="colorButtons">
+            <button id="colorButton" class="colorButtons"
                 onclick="let color = document.getElementById('enterColor').value; changeColor(color);"> ok </button>
-            <button id="revertButton" class="switch colorButtons" onclick="revertColor();"> revert </button>
+            <button id="revertButton" class="colorButtons" onclick="revertColor();"> revert </button>
         </div>
-        <p id="colorNote" class="switch"> Original color value was #17182f </p>
+        <p id="colorNote"> Original color value was #17182f </p>
     </div>
 
     <!-- Particles implementation (here and in the CSS/js files) shamelessly ripped from https://codepen.io/bob6664569/pen/rOzmve -->
