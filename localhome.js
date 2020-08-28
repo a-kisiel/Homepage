@@ -8,6 +8,14 @@ document.getElementById('acSwitch').checked = is24 ? true : false
 document.getElementById('enterColor').placeholder = storedColor;
 document.body.style.backgroundColor = storedColor;
 
+var keys = Object.keys(localStorage);
+keys.forEach(key => {
+  if (key.startsWith('favorite:')) {
+    displayFavorite(key.split(':')[1])
+    console.log(key.split(':')[1])
+  }
+});
+
 var today = new Date();
 
 // Color wheel initialization
@@ -99,6 +107,32 @@ function changeColor(color) {
   colorPicker.color.hexString = color;
 }
 
+function addFavorite(fav) {
+  if (fav === "" || document.getElementById(fav) != null)
+    return;
+
+  localStorage.setItem('favorite:' + fav, 1);
+
+  displayFavorite(fav);
+}
+
+function displayFavorite(fav) {
+  // Add to favorite bar
+  let newfav = document.createElement('div');
+  newfav.innerHTML = '<button id="' + fav + '" class="favorites" onclick="engage(\'' + fav + '\');"> ' + fav + '</button>';
+  document.getElementById('favoritesDiv').appendChild(newfav);
+  // Update favorites list
+  let favlistel = document.createElement('div');
+  favlistel.innerHTML = '<div id="' + fav + 'li" class="favel"><li class="favlistel"> ' + fav + '</li><button class="deletefav" onclick="removeFavorite(\'' + fav + '\')"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </button></div>';
+  document.getElementById('favoriteslist').appendChild(favlistel);
+}
+
+function removeFavorite(specifiedFav) {
+  document.getElementById(specifiedFav).remove();
+  document.getElementById(specifiedFav + 'li').remove();
+  localStorage.removeItem('favorite:' + specifiedFav);
+}
+
 /* Utility methods */
 
 // Writes time to DOM every second
@@ -137,11 +171,11 @@ coord.addEventListener("keyup", function (event) {
 });
 
 // E N G A G E
-function engage() {
-  let heading = document.getElementById('heading').value;
+function engage(favurl) {
+  let heading = (favurl == null)? document.getElementById('heading').value : favurl;
 
   // Unless there's been something typed in the text field don't navigate anywhere (address bar has its own mechanism)
-  if (heading === '')
+  if (heading === '' && favurl === null)
     return;
 
   if (voiceOn) {

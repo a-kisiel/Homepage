@@ -10,7 +10,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="home.css">
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
@@ -38,6 +37,21 @@
             <button id="revertButton" class="colorButtons" onclick="revertColor();"> revert </button>
         </div>
         <p id="colorNote"> Original color value was #17182f </p>
+
+        <div>
+            <div style="display: flex;">
+                <h1> Favorites </h1>
+                <button id="plusbutton" onclick="let newfav = document.getElementById('addfavtext').value; addFavorite(newfav);"> + </button>
+            </div>
+            <div id="favoritestab">
+                <div style="display: flex;">
+                    <input type="text" id="addfavtext" class="favbutton" placeholder="www.example.com">
+                    <button class="deletefav" onclick="let newfav = document.getElementById('addfavtext').value; addFavorite(newfav);" style="background-color: green;"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </button>
+                </div>
+                <ul id="favoriteslist">
+                </ul>
+            </div>
+        </div>
     </div>
 
     <!-- Particles implementation (here and in the CSS/js files) shamelessly ripped from https://codepen.io/bob6664569/pen/rOzmve -->
@@ -53,8 +67,19 @@
     <div id="stardate"></div>
 
     <div id="conn">
-        <input type="text" class="dash_button" id="heading" size="28" maxlength="255" value="" required autofocus />
-        <button type="button" class="dash_button" id="warp9" onclick="engage();"></button>
+        <input type="text" class="dash_button" id="heading" size="28" maxlength="255" value="" autofocus />
+        <button type="button" class="dash_button" id="warp9" onclick="engage(null);"></button>
+    </div>
+    <div id="extensionStack">
+        <div id="hueylewis" class="extension">
+
+        </div>
+        <div id="weather" class="extension">
+            <!-- Maybe have as a flat widget, then if there is more than one active extension push it to the side? Or add an option for it to be on the side rather than in the stack -->
+        </div>
+
+        <div id="favoritesDiv" class="extension">
+        </div>
     </div>
 
 </body>
